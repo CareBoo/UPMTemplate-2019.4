@@ -1,16 +1,15 @@
-name: Create Release
+# name: Create Release
 
-on:
-  pull_request:
-    types: [closed]
-    branches:
-      - master
-      - preview
+# # on:
+# #   pull_request:
+# #     types: [closed]
+# #     branches:
+# #       - master
+# #       - preview
 
-jobs:
-  release:
-    name: Release New Version
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-
+# jobs:
+#   release:
+#     name: Release New Version
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
