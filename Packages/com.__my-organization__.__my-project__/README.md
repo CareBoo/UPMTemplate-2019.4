@@ -17,18 +17,18 @@ The Package Manager is a work in progress for Unity. Because of that, your packa
   ├── CHANGELOG.md
   ├── Third Party Notices.md
   ├── Editor
-  │   ├── ${ORGANIZATION_PASCAL}.${PACKAGE_PASCAL}.Editor.asmdef
+  │   ├── __MyOrganization__.__MyPackage__.Editor.asmdef
   │   └── EditorExample.cs
   ├── Runtime
-  │   ├── ${ORGANIZATION_PASCAL}.${PACKAGE_PASCAL}.asmdef
+  │   ├── __MyOrganization__.__MyPackage__.asmdef
   │   └── RuntimeExample.cs
   ├── Tests
   │   ├── .tests.json
   │   ├── Editor
-  │   │   ├── ${ORGANIZATION_PASCAL}.${PACKAGE_PASCAL}.Editor.Tests.asmdef
+  │   │   ├── __MyOrganization__.__MyPackage__.Editor.Tests.asmdef
   │   │   └── EditorExampleTest.cs
   │   └── Runtime
-  │        ├── ${ORGANIZATION_PASCAL}.${PACKAGE_PASCAL}.Tests.asmdef
+  │        ├── __MyOrganization__.__MyPackage__.Tests.asmdef
   │        └── RuntimeExampleTest.cs
   ├── Samples
   │   └── Example
@@ -42,7 +42,7 @@ The Package Manager is a work in progress for Unity. Because of that, your packa
 ## Develop your package
 Package development works best within the Unity Editor.  Here's how to get started:
 
-1. Enter your package name. The name you choose should contain your default organization followed by the name you typed. For example: `${ORGANIZATION_PASCAL}.${PACKAGE_PASCAL}`.
+1. Enter your package name. The name you choose should contain your default organization followed by the name you typed. For example: `__MyOrganization__.__MyPackage__`.
 
 2. [Enter the information](#FillOutFields) for your package in the `package.json` file.
 
@@ -101,17 +101,17 @@ Use these conventions for naming and storing your assembly definition files to e
 
 * Store Editor-specific code under a root editor assembly definition file:
 
-  `Editor/${ORGANIZATION_PASCAL}.${PACKAGE_PASCAL}.Editor.asmdef`
+  `Editor/__MyOrganization__.__MyPackage__.Editor.asmdef`
 
 * Store runtime-specific code under a root runtime assembly definition file:
 
-  `Runtime/${ORGANIZATION_PASCAL}.${PACKAGE_PASCAL}.asmdef`
+  `Runtime/__MyOrganization__.__MyPackage__.asmdef`
 
 * Configure related test assemblies for your editor and runtime scripts:
 
-  `Tests/Editor/${ORGANIZATION_PASCAL}.${PACKAGE_PASCAL}.Editor.Tests.asmdef`
+  `Tests/Editor/__MyOrganization__.__MyPackage__.Editor.Tests.asmdef`
 
-  `Tests/Runtime/${ORGANIZATION_PASCAL}.${PACKAGE_PASCAL}.Tests.asmdef`
+  `Tests/Runtime/__MyOrganization__.__MyPackage__.Tests.asmdef`
 
 To get a more general view of a recommended package folder layout, see [Package layout](https://docs.unity3d.com/Manual/cus-layout.html).
 

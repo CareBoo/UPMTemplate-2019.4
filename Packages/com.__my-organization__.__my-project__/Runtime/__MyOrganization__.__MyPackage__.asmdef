@@ -1,5 +1,5 @@
 {
-    "name": "${ORGANIZATION_PASCAL}.${PACKAGE_PASCAL}",
+    "name": "__MyOrganization__.__MyPackage__",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": []

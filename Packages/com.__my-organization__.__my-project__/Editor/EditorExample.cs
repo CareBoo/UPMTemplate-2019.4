@@ -4,7 +4,7 @@
 //
 // -----------------------------------------------------------------------------
 
-namespace ${ORGANIZATION_PASCAL}.${PACKAGE_PASCAL}.Editor
+namespace __MyOrganization__.__MyPackage__.Editor
 {
     /// <summary>
     /// Provide a general description of the public class.

@@ -1,8 +1,8 @@
 {
-    "name": "${ORGANIZATION_PASCAL}.${PACKAGE_PASCAL}.Editor.Tests",
+    "name": "__MyOrganization__.__MyPackage__.Editor.Tests",
     "references": [
-        "${ORGANIZATION_PASCAL}.${PACKAGE_PASCAL}.Editor",
-        "${ORGANIZATION_PASCAL}.${PACKAGE_PASCAL}"
+        "__MyOrganization__.__MyPackage__.Editor",
+        "__MyOrganization__.__MyPackage__"
     ],
     "optionalUnityReferences": [
         "TestAssemblies"

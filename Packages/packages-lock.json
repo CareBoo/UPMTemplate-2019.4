@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "com.${ORGANIZATION_KEBAB}.__mypackage__": {
-      "version": "file:com.${ORGANIZATION_KEBAB}.__mypackage__",
+    "com.__my-organization__.__mypackage__": {
+      "version": "file:com.__my-organization__.__mypackage__",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
