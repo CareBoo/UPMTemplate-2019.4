@@ -16,12 +16,6 @@ on:
         description: 'The name of the package in kebab-case'
         required: true
 
-env:
-  ORGANIZATION_PASCAL: ${{ github.event.inputs.organizationPascal }}
-  ORGANIZATION_KEBAB: ${{ github.event.inputs.organizationKebab }}
-  PACKAGE_PASCAL: ${{ github.event.inputs.projectPascal }}
-  PACKAGE_KEBAB: ${{ github.event.inputs.projectKebab }}
-
 jobs:
   initialization:
     name: Initialize Package
@@ -35,29 +29,9 @@ jobs:
         env:
           ORGANIZATION_PASCAL: ${{ github.event.inputs.organizationPascal }}
           ORGANIZATION_KEBAB: ${{ github.event.inputs.organizationKebab }}
-          PACKAGE_PASCAL: ${{ github.event.inputs.projectPascal }}
-          PACKAGE_KEBAB: ${{ github.event.inputs.projectKebab }}
-        run: |
-          cd Packages
-
-          find . -type f -name "*.json" -exec sed -i 's/__my-organization__/${ORGANIZATION_KEBAB}/g' {} +
-          find . -type f -name "*.json" -exec sed -i 's/__my-project__/${PACKAGE_KEBAB}/g' {} +
-          
-          find . -type f -name "*.cs" -exec sed -i 's/__MyOrganization__/${ORGANIZATION_PASCAL}/g' {} +
-          find . -type f -name "*.cs" -exec sed -i 's/__MyPackage__/${PACKAGE_PASCAL}/g' {} +
-          find . -type f -name "*.asmdef" -exec sed -i 's/__MyOrganization__/${ORGANIZATION_PASCAL}/g' {} +
-          find . -type f -name "*.asmdef" -exec sed -i 's/__MyPackage__/${PACKAGE_PASCAL}/g' {} +
-          find . -type f -name "*.md" -exec sed -i 's/__MyOrganization__/${ORGANIZATION_PASCAL}/g' {} +
-          find . -type f -name "*.md" -exec sed -i 's/__MyPackage__/${PACKAGE_PASCAL}/g' {} +
-
-          find . -type f -name "*.asmdef" -exec bash -c 'mv "$2" "${2/__MyOrganization__/$1}"' -- ${ORGANIZATION_PASCAL} {} \;
-          find . -type f -name "*.asmdef" -exec bash -c 'mv "$2" "${2/__MyPackage__/$1}"' -- ${PACKAGE_PASCAL} {} \;
-          find . -type f -name "*.asmdef.meta" -exec bash -c 'mv "$2" "${2/__MyOrganization__/$1}"' -- ${ORGANIZATION_PASCAL} {} \;
-          find . -type f -name "*.asmdef.meta" -exec bash -c 'mv "$2" "${2/__MyPackage__/$1}"' -- ${PACKAGE_PASCAL} {} \;
-          find . -type f -name "*.md" -exec bash -c 'mv "$2" "${2/__MyOrganization__/$1}"' -- ${ORGANIZATION_PASCAL} {} \;
-          find . -type f -name "*.md" -exec bash -c 'mv "$2" "${2/__MyPackage__/$1}"' -- ${PACKAGE_PASCAL} {} \;
-
-          mv com.__my-organization__.__my-project__ com.${ORGANIZATION_KEBAB}.${PACKAGE_KEBAB}
+          PACKAGE_PASCAL: ${{ github.event.inputs.packagePascal }}
+          PACKAGE_KEBAB: ${{ github.event.inputs.packageKebab }}
+        run: ./init
       
       - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v4
