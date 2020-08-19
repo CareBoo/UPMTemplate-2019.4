@@ -32,14 +32,23 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Find and Replace Package Name
+        env:
+          ORGANIZATION_PASCAL: ${{ github.event.inputs.organizationPascal }}
+          ORGANIZATION_KEBAB: ${{ github.event.inputs.organizationKebab }}
+          PACKAGE_PASCAL: ${{ github.event.inputs.projectPascal }}
+          PACKAGE_KEBAB: ${{ github.event.inputs.projectKebab }}
         run: |
           cd Packages
 
           find . -type f -name "*.json" -exec sed -i 's/__my-organization__/${ORGANIZATION_KEBAB}/g' {} +
           find . -type f -name "*.json" -exec sed -i 's/__my-project__/${PACKAGE_KEBAB}/g' {} +
           
-          find . -type f -name "*.cs" -o -name "*.md" -o -name "*.asmdef" -exec sed -i 's/__MyOrganization__/${ORGANIZATION_PASCAL}/g' {} +
-          find . -type f -name "*.cs" -o -name "*.md" -o -name "*.asmdef" -exec sed -i 's/__MyPackage__/${PACKAGE_PASCAL}/g' {} +
+          find . -type f -name "*.cs" -exec sed -i 's/__MyOrganization__/${ORGANIZATION_PASCAL}/g' {} +
+          find . -type f -name "*.cs" -exec sed -i 's/__MyPackage__/${PACKAGE_PASCAL}/g' {} +
+          find . -type f -name "*.asmdef" -exec sed -i 's/__MyOrganization__/${ORGANIZATION_PASCAL}/g' {} +
+          find . -type f -name "*.asmdef" -exec sed -i 's/__MyPackage__/${PACKAGE_PASCAL}/g' {} +
+          find . -type f -name "*.md" -exec sed -i 's/__MyOrganization__/${ORGANIZATION_PASCAL}/g' {} +
+          find . -type f -name "*.md" -exec sed -i 's/__MyPackage__/${PACKAGE_PASCAL}/g' {} +
 
           find . -type f -name "*.asmdef" -exec bash -c 'mv "$2" "${2/__MyOrganization__/$1}"' -- ${ORGANIZATION_PASCAL} {} \;
           find . -type f -name "*.asmdef" -exec bash -c 'mv "$2" "${2/__MyPackage__/$1}"' -- ${PACKAGE_PASCAL} {} \;
