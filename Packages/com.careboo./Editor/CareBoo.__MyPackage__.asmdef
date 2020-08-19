@@ -1,7 +1,7 @@
 {
-    "name": "__MyOrganization__.__MyPackage__.Editor",
+    "name": "${ORGANIZATION_PASCAL}.${PACKAGE_PASCAL}.Editor",
     "references": [
-      "__MyOrganization__.__MyPackage__"
+      "${ORGANIZATION_PASCAL}.${PACKAGE_PASCAL}"
     ],
     "includePlatforms": [
         "Editor"

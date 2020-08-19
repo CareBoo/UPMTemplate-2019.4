@@ -1,7 +1,7 @@
 {
-    "name": "__MyOrganization__.__MyPackage__.Tests",
+    "name": "${ORGANIZATION_PASCAL}.${PACKAGE_PASCAL}.Tests",
     "references": [
-        "__MyOrganization__.__MyPackage__"
+        "${ORGANIZATION_PASCAL}.${PACKAGE_PASCAL}"
     ],
     "optionalUnityReferences": [
         "TestAssemblies"

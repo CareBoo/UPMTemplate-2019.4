@@ -5,7 +5,7 @@
 //
 // -----------------------------------------------------------------------------
 
-namespace __MyOrganization__.__MyPackage__
+namespace ${ORGANIZATION_PASCAL}.${PACKAGE_PASCAL}
 {
     /// <summary>
     /// Provide a general description of the public class.
