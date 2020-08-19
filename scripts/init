@@ -2,8 +2,15 @@
 
 find . -type f -name "*release*.json" -exec sed -i "s/__my-organization__/$ORGANIZATION_KEBAB/g" {} +
 find . -type f -name "*release*.json" -exec sed -i "s/__my-package__/$PACKAGE_KEBAB/g" {} +
-find . -type f -name "*release*.yaml" -exec sed -i "s/__my-organization__/$ORGANIZATION_KEBAB/g" {} +
-find . -type f -name "*release*.yaml" -exec sed -i "s/__my-package__/$PACKAGE_KEBAB/g" {} +
+
+cd scripts
+
+find . -type f -exec sed -i "s/__MyOrganization__/$ORGANIZATION_PASCAL/g" {} +
+find . -type f -exec sed -i "s/__MyPackage__/$PACKAGE_PASCAL/g" {} +
+find . -type f -exec sed -i "s/__my-organization__/$ORGANIZATION_KEBAB/g" {} +
+find . -type f -exec sed -i "s/__my-package__/$PACKAGE_KEBAB/g" {} +
+
+cd -
 
 cd Packages
 
@@ -27,3 +34,5 @@ find . -type f -name "*.md.meta" -exec bash -c 'mv "$2" "${2/__MyOrganization__/
 find . -type f -name "*.md.meta" -exec bash -c 'mv "$2" "${2/__MyPackage__/$1}"' -- ${PACKAGE_PASCAL} {} \;
 
 mv com.__my-organization__.__my-package__ com.${ORGANIZATION_KEBAB}.${PACKAGE_KEBAB}
+
+cd -

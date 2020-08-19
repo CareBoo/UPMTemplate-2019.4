@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+echo "::set-output name=result::+__MyOrganization__.__MyProject__*,-__MyOrganization__.__MyProject__*.Tests,-__MyOrganization__.__MyProject__*.Samples*"
