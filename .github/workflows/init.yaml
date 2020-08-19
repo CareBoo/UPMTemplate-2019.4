@@ -1,4 +1,4 @@
-name: Initialize Project
+name: Initialize Package
 
 on: 
   workflow_dispatch:
@@ -24,7 +24,7 @@ env:
 
 jobs:
   initialization:
-    name: Initialize Project
+    name: Initialize Package
     runs-on: ubuntu-latest
 
     steps:
@@ -53,3 +53,8 @@ jobs:
           find . -type f -name "*.asmdef.meta" -exec bash -c 'mv "$2" "${2/__MyProject__/$1}"' -- ${PROJ_PASCAL} {} \;
 
           mv com.__my-organization__.__my-project__ com.${ORG_KEBAB}.${PROJ_KEBAB}
+      
+      - name: Commit Changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 'chore: Initialize Package [skip ci]'
