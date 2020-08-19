@@ -1,0 +1,55 @@
+name: Initialize Project
+
+on: 
+  workflow_dispatch:
+    inputs:
+      organizationPascal:
+        description: 'The name of the organization in `PascalCase`.'
+        required: true
+      organizationKebab:
+        description: 'The name of the organization in `kebab-case`.'
+        required: true
+      projectPascal:
+        description: 'The name of the project in `PascalCase`.'
+        required: true
+      projectKebab:
+        description: 'The name of the project in `kebab-case`'
+        required: true
+
+env:
+  ORG_PASCAL: ${{ github.event.inputs.organizationPascal }}
+  ORG_KEBAB: ${{ github.event.inputs.organizationKebab }}
+  PROJ_PASCAL: ${{ github.event.inputs.projectPascal }}
+  PROJ_KEBAB: ${{ github.event.inputs.projectKebab }}
+
+jobs:
+  initialization:
+    name: Initialize Project
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Find and Replace Package Name
+        run: |
+          cd Packages
+
+          find . -type f -name "*.json" -exec sed -i 's/__my-organization__/${ORG_KEBAB}/g' {} +
+          find . -type f -name "*.json" -exec sed -i 's/__my-project__/${PROJ_KEBAB}/g' {} +
+          
+          find . -type f -name "*.cs" -exec sed -i 's/__MyOrganization__/${ORG_PASCAL}/g' {} +
+          find . -type f -name "*.cs" -exec sed -i 's/__MyProject__/${PROJ_PASCAL}/g' {} +
+
+          find . -type f -name "*.md" -exec sed -i 's/__MyOrganization__/${ORG_PASCAL}/g' {} +
+          find . -type f -name "*.md" -exec sed -i 's/__MyProject__/${PROJ_PASCAL}/g' {} +
+
+          find . -type f -name "*.asmdef" -exec sed -i 's/__MyOrganization__/${ORG_PASCAL}/g' {} +
+          find . -type f -name "*.asmdef" -exec sed -i 's/__MyProject__/${PROJ_PASCAL}/g' {} +
+
+          find . -type f -name "*.asmdef" -exec bash -c 'mv "$2" "${2/__MyOrganization__/$1}"' -- ${ORG_PASCAL} {} \;
+          find . -type f -name "*.asmdef" -exec bash -c 'mv "$2" "${2/__MyProject__/$1}"' -- ${PROJ_PASCAL} {} \;
+          find . -type f -name "*.asmdef.meta" -exec bash -c 'mv "$2" "${2/__MyOrganization__/$1}"' -- ${ORG_PASCAL} {} \;
+          find . -type f -name "*.asmdef.meta" -exec bash -c 'mv "$2" "${2/__MyProject__/$1}"' -- ${PROJ_PASCAL} {} \;
+
+          mv com.__my-organization__.__my-project__ com.${ORG_KEBAB}.${PROJ_KEBAB}

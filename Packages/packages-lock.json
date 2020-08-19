@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.__my-organization__.__mypackage__": {
+      "version": "file:com.__my-organization__.__mypackage__",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.ext.nunit": {
       "version": "1.0.0",
       "depth": 1,
@@ -24,7 +30,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.package-validation-suite": {
-      "version": "0.13.0-preview",
+      "version": "0.14.0-preview",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -51,7 +57,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.testtools.codecoverage": {
-      "version": "0.3.0-preview",
+      "version": "0.3.1-preview",
       "depth": 0,
       "source": "registry",
       "dependencies": {
