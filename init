@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+find . -type f -name "*release*.json" -exec sed -i "s/__my-organization__/$ORGANIZATION_KEBAB/g" {} +
+find . -type f -name "*release*.json" -exec sed -i "s/__my-package__/$PACKAGE_KEBAB/g" {} +
+find . -type f -name "*release*.yaml" -exec sed -i "s/__my-organization__/$ORGANIZATION_KEBAB/g" {} +
+find . -type f -name "*release*.yaml" -exec sed -i "s/__my-package__/$PACKAGE_KEBAB/g" {} +
+
 cd Packages
 
 find . -type f -name "*.json" -exec sed -i "s/__my-organization__/$ORGANIZATION_KEBAB/g" {} +
