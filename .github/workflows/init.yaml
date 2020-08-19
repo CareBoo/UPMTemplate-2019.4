@@ -31,7 +31,9 @@ jobs:
           ORGANIZATION_KEBAB: ${{ github.event.inputs.organizationKebab }}
           PACKAGE_PASCAL: ${{ github.event.inputs.packagePascal }}
           PACKAGE_KEBAB: ${{ github.event.inputs.packageKebab }}
-        run: ./init
+        run: |
+          ./init
+          rm init
       
       - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v4
