@@ -1,5 +1,5 @@
 {
-    "name": "__MyOrganization__.__MyPackage__",
+    "name": "TestOrg.TestPackage",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": []
