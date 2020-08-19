@@ -4,23 +4,23 @@ on:
   workflow_dispatch:
     inputs:
       organizationPascal:
-        description: 'The name of the organization in `PascalCase`.'
+        description: 'The name of the organization in PascalCase.'
         required: true
       organizationKebab:
-        description: 'The name of the organization in `kebab-case`.'
+        description: 'The name of the organization in kebab-case.'
         required: true
-      projectPascal:
-        description: 'The name of the project in `PascalCase`.'
+      packagePascal:
+        description: 'The name of the package in PascalCase.'
         required: true
-      projectKebab:
-        description: 'The name of the project in `kebab-case`'
+      packageKebab:
+        description: 'The name of the package in kebab-case'
         required: true
 
 env:
-  ORG_PASCAL: ${{ github.event.inputs.organizationPascal }}
-  ORG_KEBAB: ${{ github.event.inputs.organizationKebab }}
-  PROJ_PASCAL: ${{ github.event.inputs.projectPascal }}
-  PROJ_KEBAB: ${{ github.event.inputs.projectKebab }}
+  ORGANIZATION_PASCAL: ${{ github.event.inputs.organizationPascal }}
+  ORGANIZATION_KEBAB: ${{ github.event.inputs.organizationKebab }}
+  PACKAGE_PASCAL: ${{ github.event.inputs.projectPascal }}
+  PACKAGE_KEBAB: ${{ github.event.inputs.projectKebab }}
 
 jobs:
   initialization:
@@ -35,24 +35,20 @@ jobs:
         run: |
           cd Packages
 
-          find . -type f -name "*.json" -exec sed -i 's/__my-organization__/${ORG_KEBAB}/g' {} +
-          find . -type f -name "*.json" -exec sed -i 's/__my-project__/${PROJ_KEBAB}/g' {} +
+          find . -type f -name "*.json" -exec sed -i 's/__my-organization__/${ORGANIZATION_KEBAB}/g' {} +
+          find . -type f -name "*.json" -exec sed -i 's/__my-project__/${PACKAGE_KEBAB}/g' {} +
           
-          find . -type f -name "*.cs" -exec sed -i 's/__MyOrganization__/${ORG_PASCAL}/g' {} +
-          find . -type f -name "*.cs" -exec sed -i 's/__MyProject__/${PROJ_PASCAL}/g' {} +
+          find . -type f -name "*.cs" -o -name "*.md" -o -name "*.asmdef" -exec sed -i 's/__MyOrganization__/${ORGANIZATION_PASCAL}/g' {} +
+          find . -type f -name "*.cs" -o -name "*.md" -o -name "*.asmdef" -exec sed -i 's/__MyPackage__/${PACKAGE_PASCAL}/g' {} +
 
-          find . -type f -name "*.md" -exec sed -i 's/__MyOrganization__/${ORG_PASCAL}/g' {} +
-          find . -type f -name "*.md" -exec sed -i 's/__MyProject__/${PROJ_PASCAL}/g' {} +
+          find . -type f -name "*.asmdef" -exec bash -c 'mv "$2" "${2/__MyOrganization__/$1}"' -- ${ORGANIZATION_PASCAL} {} \;
+          find . -type f -name "*.asmdef" -exec bash -c 'mv "$2" "${2/__MyPackage__/$1}"' -- ${PACKAGE_PASCAL} {} \;
+          find . -type f -name "*.asmdef.meta" -exec bash -c 'mv "$2" "${2/__MyOrganization__/$1}"' -- ${ORGANIZATION_PASCAL} {} \;
+          find . -type f -name "*.asmdef.meta" -exec bash -c 'mv "$2" "${2/__MyPackage__/$1}"' -- ${PACKAGE_PASCAL} {} \;
+          find . -type f -name "*.md" -exec bash -c 'mv "$2" "${2/__MyOrganization__/$1}"' -- ${ORGANIZATION_PASCAL} {} \;
+          find . -type f -name "*.md" -exec bash -c 'mv "$2" "${2/__MyPackage__/$1}"' -- ${PACKAGE_PASCAL} {} \;
 
-          find . -type f -name "*.asmdef" -exec sed -i 's/__MyOrganization__/${ORG_PASCAL}/g' {} +
-          find . -type f -name "*.asmdef" -exec sed -i 's/__MyProject__/${PROJ_PASCAL}/g' {} +
-
-          find . -type f -name "*.asmdef" -exec bash -c 'mv "$2" "${2/__MyOrganization__/$1}"' -- ${ORG_PASCAL} {} \;
-          find . -type f -name "*.asmdef" -exec bash -c 'mv "$2" "${2/__MyProject__/$1}"' -- ${PROJ_PASCAL} {} \;
-          find . -type f -name "*.asmdef.meta" -exec bash -c 'mv "$2" "${2/__MyOrganization__/$1}"' -- ${ORG_PASCAL} {} \;
-          find . -type f -name "*.asmdef.meta" -exec bash -c 'mv "$2" "${2/__MyProject__/$1}"' -- ${PROJ_PASCAL} {} \;
-
-          mv com.__my-organization__.__my-project__ com.${ORG_KEBAB}.${PROJ_KEBAB}
+          mv com.__my-organization__.__my-project__ com.${ORGANIZATION_KEBAB}.${PACKAGE_KEBAB}
       
       - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v4
