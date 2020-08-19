@@ -5,10 +5,10 @@ find . -type f -name "*release*.json" -exec sed -i "s/__my-package__/$PACKAGE_KE
 
 cd scripts
 
-find . -type f -exec sed -i "s/__MyOrganization__/$ORGANIZATION_PASCAL/g" {} +
-find . -type f -exec sed -i "s/__MyPackage__/$PACKAGE_PASCAL/g" {} +
-find . -type f -exec sed -i "s/__my-organization__/$ORGANIZATION_KEBAB/g" {} +
-find . -type f -exec sed -i "s/__my-package__/$PACKAGE_KEBAB/g" {} +
+find . -type f ! -name "init" -exec sed -i "s/__MyOrganization__/$ORGANIZATION_PASCAL/g" {} +
+find . -type f ! -name "init" -exec sed -i "s/__MyPackage__/$PACKAGE_PASCAL/g" {} +
+find . -type f ! -name "init" -exec sed -i "s/__my-organization__/$ORGANIZATION_KEBAB/g" {} +
+find . -type f ! -name "init" -exec sed -i "s/__my-package__/$PACKAGE_KEBAB/g" {} +
 
 cd -
 
