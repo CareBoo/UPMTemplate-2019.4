@@ -34,6 +34,7 @@ jobs:
         run: |
           ./init
           rm init
+          rm .github/workflows/init.yaml
       
       - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v4
